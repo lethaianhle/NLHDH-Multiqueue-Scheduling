@@ -4,6 +4,7 @@ var queue2List = [];
 var queue3List = [];
 const formProcess = document.getElementById('process-form');
 const btnCalculate = document.getElementById('btnCal');
+const btnClear = document.getElementById('btnClear');
 
 formProcess.addEventListener('submit', event => {
     event.preventDefault();
@@ -30,8 +31,19 @@ formProcess.addEventListener('submit', event => {
 
     formProcess.reset();
 
+    window.localStorage.setItem('processList', JSON.stringify(processList));
+
     renderData(processList);
 });
+
+function renderDataFromLocalStorage() {
+    let processListFromStorage = JSON.parse(window.localStorage.getItem('processList'));  
+    renderData(processListFromStorage);
+}
+
+btnClear.addEventListener('click', (e) => {
+    localStorage.clear();
+})
 
 btnCalculate.addEventListener('click', event => {
     if (processList.length == 0) {
