@@ -52,7 +52,7 @@ btnCalculate.addEventListener('click', event => {
     }
 
     processList.forEach(process => {
-        if (process.priority > 6) {
+        if (process.priority >= 6) {
             queue3List.push(process);
         }
 
