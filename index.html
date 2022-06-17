@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multilevel Queue Scheduling</title>
+
+  <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="form-validation.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+  <div class="container">
+
+    <div class="py-5 text-center">
+      <h2>Multilevel Queue Scheduling</h2>
+      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group
+        has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Queues</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Queue 1: System Processes</h6>
+              <small class="text-muted">First Come First Served</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Queue 2: Interactive Processes</h6>
+              <small class="text-muted">Shortest Job First</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Queue 3: Batch Processes</h6>
+              <small class="text-muted">Round Robin - 4 secs</small>
+            </div>
+          </li>
+        </ul>
+
+        <form class="row">
+          <div class="input-group">
+            <button id="btnCal" type="button" class="btn btn-primary">Calculate</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Processes</h4>
+        <form id="process-form" class="needs-validation" novalidate>
+          <div class="row g-3">
+
+            <div class="col-md-3">
+              <label for="process-id" class="form-label">Id</label>
+              <input type="number" min="0" class="form-control" id="process-id" placeholder="" required>
+              <div class="invalid-feedback">
+                Id is invalid
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="arrival-time" class="form-label">Arrival Time</label>
+              <input type="number" min="0" class="form-control" id="arrival-time" placeholder="" required>
+              <div class="invalid-feedback">
+                Arrival time is invalid
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="burst-time" class="form-label">Burst Time</label>
+              <input type="number" min="0" class="form-control" id="burst-time" placeholder="" required>
+              <div class="invalid-feedback">
+                Burst time is invalid
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="priority" class="form-label">Priority</label>
+              <input type="number" min="0" class="form-control" id="priority" placeholder="" required>
+              <div class="invalid-feedback">
+                Priority is invalid
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" id="btnAddProcess" type="submit">Add
+            Process</button>
+        </form>
+
+        <table class="mt-4 table table-bordered" id="tblProcessList">
+          <thead>
+            <tr>
+              <th scope="col">Process ID</th>
+              <th scope="col">Arrival Time</th>
+              <th scope="col">Burst Time</th>
+              <th scope="col">Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div id="result1" class="col-md-12">
+
+    </div>
+
+    <div id="result2" class="col-md-12">
+
+    </div>
+
+    <div id="result3" class="col-md-12">
+
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2022 @lethaianhle - Nguyen Ly He Dieu Hanh</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    </footer>
+  </div>
+
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="form-validation.js"></script>
+  <script src="./app.js"></script>
+</body>
+
+</html>
